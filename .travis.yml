@@ -2,6 +2,7 @@ language: c
 
 compiler:
   - gcc
+  - clang
 
 addons:
   apt:
@@ -23,6 +24,7 @@ before_script:
 
 script:
   # once CMake has done its job we just build using make as usual
-  - cmake --build .
+  - make
   # if the project uses ctest we can run the tests like this
   # - make test
+  - cppcheck --enable=warning,performance,information *.c; fi
