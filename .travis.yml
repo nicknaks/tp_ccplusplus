@@ -29,5 +29,6 @@ script:
   # - make test
   - ./tests/Google_Tests_run
   - valgrind --tool=memcheck --leak-check=yes ./tests/Google_Tests_run
+  - lcov --capture --directory . --output-file coverage.info
   - cd ..
   - cppcheck --enable=warning,performance,information *.c
