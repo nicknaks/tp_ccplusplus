@@ -7,14 +7,17 @@ int main() {
   Node *head = NULL;
   menu(&head);
 
-  if (head != NULL) {
-    del_node(&head);
-  }
+  del_node(&head);
 
   return 0;
 }
 
 int menu(Node **head) {
+  if (head == NULL) {
+    return -1;
+  }
+
+  int function_result = 0;
   int command = 0;
 
   do {
@@ -23,26 +26,49 @@ int menu(Node **head) {
     scanf("%d", &command);
 
     switch (command) {
-      case 1:scan_doc(&document, 'W');
+      case 1:
+        function_result = scan_doc(&document, 'W');
+        if (function_result != 0) {
+          return -1;
+        }
 
         if (head == NULL) {
           *head = init_node(document);
+
+          if (head == NULL) {
+            return -1;
+          }
         } else {
-          add_node(head, document);
+          function_result = add_node(head, document);
+          if (function_result != 0){
+            return -1;
+          }
         }
         break;
 
-      case 2:printf("If you want to pass any field, enter -1\n");
-        scan_doc(&document, 'P');
-        find_documents(*head, &document);
+      case 2:
+        printf("If you want to pass any field, enter -1\n");
+
+        function_result = scan_doc(&document, 'P');
+        if (function_result != 0) {
+          return -1;
+        }
+
+        function_result = find_documents(*head, &document);
+        if (function_result != 0){
+          return -1;
+        }
+
         break;
 
-      default:command = 3;
+      default:
+        command = 3;
         break;
     }
   } while (command == 1 || command == 2);
   return 0;
 }
+
 int find_documents(Node *head, Doc *search_document) {
   if (head == NULL || search_document == NULL) {
     return -1;

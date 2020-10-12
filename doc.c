@@ -1,6 +1,10 @@
 #include "doc.h"
 
 int scan_doc(Doc *document, char choose) {
+  if (document == NULL){
+    return -1;
+  }
+
   char buf[50];
 
   printf("%s", "Enter organization name : ");
@@ -56,7 +60,7 @@ int scan_doc(Doc *document, char choose) {
   }
 
   int rusLang;
-  if (choose == 'W') {
+  if (choose == 'P') {
     printf("%s", "If you wont to skip Russian language support enter -1 : ");
     scanf("%d", &field_choose);
 
@@ -75,11 +79,17 @@ int scan_doc(Doc *document, char choose) {
     document->rus_lang = 0;
   }
 
-  printf("%s", "SUCCESS : add new document\n");
+  if (choose == 'W') {
+    printf("%s", "SUCCESS : add new document\n");
+  }
   return 0;
 }
 
 int print_document(Doc *document) {
+  if (document == NULL) {
+    return -1;
+  }
+
   printf("%s || %s || %s || ", document->name, document->type, document->organization);
   print_date(&document->entry_date);
   printf(" || ");
