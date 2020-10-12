@@ -27,4 +27,5 @@ script:
   - make
   # if the project uses ctest we can run the tests like this
   # - make test
-  - cppcheck --enable=warning,performance,information *.c; fi
+  - make /tests/Google_Tests_run
+  - cppcheck --enable=warning,performance,information *.c
