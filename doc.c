@@ -14,6 +14,9 @@ int scan_doc(Doc *document, char choose) {
     document->organization = NULL;
   } else {
     document->organization = (char *) malloc(strlen(buf) + 1);
+    if (document->organization == NULL){
+      return -1;
+    }
     strncpy(document->organization, buf, strlen(buf) + 1);
   }
 
@@ -24,6 +27,10 @@ int scan_doc(Doc *document, char choose) {
     document->type = NULL;
   } else {
     document->type = (char *) malloc(strlen(buf) + 1);
+    if (document->type == NULL){
+      return -1;
+    }
+
     strncpy(document->type, buf, strlen(buf) + 1);
   }
 
@@ -34,6 +41,9 @@ int scan_doc(Doc *document, char choose) {
     document->name = NULL;
   } else {
     document->name = (char *) malloc(strlen(buf) + 1);
+    if (document->name == NULL){
+      return -1;
+    }
     strncpy(document->name, buf, strlen(buf) + 1);
   }
 
@@ -61,7 +71,7 @@ int scan_doc(Doc *document, char choose) {
 
   int rusLang;
   if (choose == 'P') {
-    printf("%s", "If you wont to skip Russian language support enter -1 : ");
+    printf("%s", "If you want to skip Russian language support enter -1 : ");
     scanf("%d", &field_choose);
 
     if (field_choose == -1) {
