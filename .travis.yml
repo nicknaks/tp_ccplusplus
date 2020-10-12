@@ -28,4 +28,5 @@ script:
   # if the project uses ctest we can run the tests like this
   # - make test
   - ./tests/Google_Tests_run
+  - valgrind --tool=memcheck --leak-check=yes ./tests/Google_Tests_run
   #- cppcheck --enable=warning,performance,information *.c
