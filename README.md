@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/nicknaks/tp_ccplusplus.svg?branch=main)](https://travis-ci.com/nicknaks/tp_ccplusplus)
+[![Build Status](https://travis-ci.com/nicknaks/tp_ccplusplus.svg?branch=making-hw-1)](https://travis-ci.com/nicknaks/tp_ccplusplus)
 
 ИЗ1 посвящено приобретению навыков безопасной работы с памятью на языке C с использованием базовых структур данных и налаживания базовой инфраструктуры для автоматической проверки кода. В качестве результата ИЗ2 ожидается:
 * грамотное разбиение проекта на файлы;
