@@ -2,7 +2,6 @@ language: c
 
 compiler:
   - gcc
-  - clang
 
 addons:
   apt:
@@ -30,5 +29,6 @@ script:
   - ./tests/Google_Tests_run
   - valgrind --tool=memcheck --leak-check=yes ./tests/Google_Tests_run
   - lcov --capture --directory . --output-file coverage.info
+  - bash <(curl -s https://codecov.io/bash)
   - cd ..
   - cppcheck --enable=warning,performance,information *.c
