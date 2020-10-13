@@ -14,4 +14,6 @@ Node* init_node(Doc value);
 
 int del_node(Node** head);
 
+int find_documents(Node *head, Doc *search_document);
+
 #endif //HW_1__MY_LIST_H_

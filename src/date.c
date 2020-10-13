@@ -1,4 +1,4 @@
-#include "date.h"
+#include "../include/date.h"
 
 
 int scan_date(Date *date) {

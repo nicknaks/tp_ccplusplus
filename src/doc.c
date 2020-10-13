@@ -1,14 +1,16 @@
-#include "doc.h"
+#include "../include/doc.h"
 
+// choose : 'P' - to scan doc with pass fields
+// choose : 'W' - to scan doc without pass any field
 int scan_doc(Doc *document, char choose) {
   if (document == NULL){
     return -1;
   }
 
-  char buf[50];
+  char buf[30];
 
   printf("%s", "Enter organization name : ");
-  scanf("%s", buf);
+  scanf("%29s", buf);
 
   if (choose == 'P' && buf[0] == '-' && buf[1] == '1') {
     document->organization = NULL;
@@ -21,7 +23,7 @@ int scan_doc(Doc *document, char choose) {
   }
 
   printf("%s", "Enter document type : ");
-  scanf("%s", &buf);
+  scanf("%29s", &buf);
 
   if (choose == 'P' && buf[0] == '-' && buf[1] == '1') {
     document->type = NULL;
@@ -35,7 +37,7 @@ int scan_doc(Doc *document, char choose) {
   }
 
   printf("%s", "Enter english name : ");
-  scanf("%s", &buf);
+  scanf("%29s", &buf);
 
   if (choose == 'P' && buf[0] == '-' && buf[1] == '1') {
     document->name = NULL;
@@ -111,5 +113,3 @@ int print_document(Doc *document) {
   }
   return 0;
 }
-
-
