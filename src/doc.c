@@ -4,7 +4,7 @@
 // choose : 'W' - to scan doc without pass any field
 int scan_doc(Doc *document, char choose) {
   if (document == NULL){
-    return -1;
+    return EXIT_FAILURE;
   }
 
   char buf[30];
@@ -17,7 +17,7 @@ int scan_doc(Doc *document, char choose) {
   } else {
     document->organization = (char *) malloc(strlen(buf) + 1);
     if (document->organization == NULL){
-      return -1;
+      return EXIT_FAILURE;
     }
     strncpy(document->organization, buf, strlen(buf) + 1);
   }
@@ -30,7 +30,7 @@ int scan_doc(Doc *document, char choose) {
   } else {
     document->type = (char *) malloc(strlen(buf) + 1);
     if (document->type == NULL){
-      return -1;
+      return EXIT_FAILURE;
     }
 
     strncpy(document->type, buf, strlen(buf) + 1);
@@ -43,8 +43,9 @@ int scan_doc(Doc *document, char choose) {
     document->name = NULL;
   } else {
     document->name = (char *) malloc(strlen(buf) + 1);
+
     if (document->name == NULL){
-      return -1;
+      return EXIT_FAILURE;
     }
     strncpy(document->name, buf, strlen(buf) + 1);
   }
@@ -57,8 +58,14 @@ int scan_doc(Doc *document, char choose) {
     scanf("%d", &field_choose);
   }
 
+  int function_result = 0;
+
   if (choose == 'W' || field_choose != -1) {
-    scan_date(&document->adoption_date);
+    function_result = scan_date(&document->adoption_date);
+
+    if (function_result == EXIT_FAILURE) {
+      return EXIT_FAILURE;
+    }
   }
 
   printf("%s", "\tEntry date\n");
@@ -68,48 +75,49 @@ int scan_doc(Doc *document, char choose) {
   }
 
   if (choose == 'W' || field_choose != -1) {
-    scan_date(&document->entry_date);
-  }
+    function_result = scan_date(&document->entry_date);
 
-  int rusLang;
-  if (choose == 'P') {
-    printf("%s", "If you want to skip Russian language support enter -1 : ");
-    scanf("%d", &field_choose);
-
-    if (field_choose == -1) {
-      document->rus_lang = -1;
-      return 0;
+    if (function_result == EXIT_FAILURE) {
+      return EXIT_FAILURE;
     }
   }
 
+  int rus_lang = 0;
+
+  if (choose == 'P') {
+    document->rus_lang = false;
+    return EXIT_SUCCESS;
+  }
+
   printf("%s", "Does the Russian language support (if support, enter 1) : ");
-  scanf("%d", &rusLang);
+  scanf("%d", &rus_lang);
 
-  if (rusLang == 1) {
-    document->rus_lang = 1;
+  if (rus_lang == 1) {
+    document->rus_lang = true;
   } else {
-    document->rus_lang = 0;
+    document->rus_lang = false;
   }
+  printf("%s", "SUCCESS : add new document\n");
 
-  if (choose == 'W') {
-    printf("%s", "SUCCESS : add new document\n");
-  }
-  return 0;
+  return EXIT_SUCCESS;
 }
 
 int print_document(Doc *document) {
   if (document == NULL) {
-    return -1;
+    return EXIT_FAILURE;
   }
 
   printf("%s || %s || %s || ", document->name, document->type, document->organization);
   print_date(&document->entry_date);
+
   printf(" || ");
   print_date(&document->adoption_date);
-  if (document->rus_lang == 1) {
-    printf(" || rus_support\n");
+
+  if (document->rus_lang == true) {
+    printf(" || Support\n");
   } else {
-    printf(" || rus_doesn't_support\n");
+    printf(" || Doesn't Support\n");
   }
-  return 0;
+
+  return EXIT_SUCCESS;
 }

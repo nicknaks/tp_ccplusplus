@@ -2,53 +2,53 @@
 
 
 int scan_date(Date *date) {
-  if (date == NULL){
-    return -1;
+  if (date == NULL) {
+    return EXIT_FAILURE;
   }
 
-  int tmp;
+  int scan_field = 0;
 
   printf("%s", "Enter day : ");
-  scanf("%d", &tmp);
+  scanf("%d", &scan_field);
 
-  if (tmp >= 1 && tmp <= 31) {
-    date->day = tmp;
+  if (scan_field >= 1 && scan_field <= 31) {
+    date->day = scan_field;
   } else {
     date->day = 0;
   }
 
   printf("%s", "Enter month :");
-  scanf("%d", &tmp);
+  scanf("%d", &scan_field);
 
-  if (tmp >= 1 && tmp <= 12) {
-    date->month = tmp;
+  if (scan_field >= 1 && scan_field <= 12) {
+    date->month = scan_field;
   } else {
     date->month = 0;
   }
 
   printf("%s", "Enter  year : ");
-  scanf("%d", &tmp);
-  if (tmp >= 1) {
-    date->year = tmp;
+  scanf("%d", &scan_field);
+  if (scan_field >= 1) {
+    date->year = scan_field;
   } else {
     date->year = 0;
   }
 
-  return 0;
+  return EXIT_SUCCESS;
 }
 
 int compare_date(Date *rhs, Date *lhs) {
   if (rhs == NULL || lhs == NULL) {
-    return -1;
+    return EXIT_FAILURE;
   }
   return rhs->day == lhs->day && rhs->month == lhs->month && rhs->year == lhs->year;
 }
 
 int print_date(Date *date) {
   if (date == NULL) {
-    return -1;
+    return EXIT_FAILURE;
   }
 
   printf("%d/%d/%d", date->day, date->month, date->year);
-  return 0;
+  return EXIT_SUCCESS;
 }

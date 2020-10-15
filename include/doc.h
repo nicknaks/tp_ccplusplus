@@ -1,8 +1,8 @@
 #ifndef HW_1__DOC_H_
 #define HW_1__DOC_H_
 
-#include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 #include "date.h"
 
@@ -12,7 +12,7 @@ typedef struct Doc{
   char* name;
   Date adoption_date;
   Date entry_date;
-  short rus_lang; // true or false
+  bool rus_lang; // true or false
 } Doc;
 
 int scan_doc(Doc* document, char choose);

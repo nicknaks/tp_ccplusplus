@@ -8,12 +8,13 @@ typedef struct Node{
   struct Node* next;
 } Node;
 
-int add_node(Node** head, Doc value);
+// add to the top of the list
+int add_node(Node** head, Doc* value);
 
-Node* init_node(Doc value);
+Node* init_node(Doc* value);
 
 int del_node(Node** head);
 
-int find_documents(Node *head, Doc *search_document);
+int find_documents(Node *list_docs, Doc *search_document);
 
 #endif //HW_1__MY_LIST_H_

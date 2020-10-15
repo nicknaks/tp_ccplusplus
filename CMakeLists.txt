@@ -3,6 +3,8 @@ project(hw_1 C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(hw_1 src/main.c src/my_list.c include/my_list.h src/date.c include/date.h src/doc.c include/doc.h)
+set(SOURCES src/main.c src/my_list.c src/date.c src/doc.c)
+
+add_executable(hw_1 ${SOURCES})
 
 add_subdirectory(tests)
