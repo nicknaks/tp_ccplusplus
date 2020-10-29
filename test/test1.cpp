@@ -1,4 +1,4 @@
-#include "lib/googletest/include/gtest/gtest.h"
+#include "googletest/googletest/include/gtest/gtest.h"
 
 extern "C" {
   #include "../project/my_list/List.c"
