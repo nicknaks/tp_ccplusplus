@@ -28,8 +28,8 @@ script:
   # static googletest
   - cmake .. -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION -DTARGET_CPU=$TARGET_CPU -DCMAKE_C_FLAGS="--coverage" -DCMAKE_CXX_FLAGS="--coverage"
   - make
-  - ./tests/Google_Tests_run
-  - valgrind --tool=memcheck --leak-check=yes ./tests/Google_Tests_run
+  - ./test/Google_Tests_run
+  - valgrind --tool=memcheck --leak-check=yes ./test/Google_Tests_run
   # shared googletest
   - lcov --capture --directory . --output-file coverage.info
   - bash <(curl -s https://codecov.io/bash)
