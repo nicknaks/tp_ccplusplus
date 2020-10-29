@@ -31,7 +31,7 @@ target_include_directories(StaticLib PUBLIC include)
 #---------------SHARED LIB------------------------
 set( CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON )
 add_library(SharedLib SHARED project/my_array/Array.c project/my_list/List.c project/Employee.c ${print_node})
-target_link_libraries(SharedLib)
+target_link_libraries(SharedLib pthread)
 target_include_directories(SharedLib PUBLIC include)
 #---------------SHARED LIB------------------------
 
