@@ -8,22 +8,23 @@ int scan_employee_from_file(FILE *file, Employee* person) {
   char buf [30];
 
   // read surname
-  fscanf(file, "%s", buf);
+  fscanf(file, "%29s", buf);
   person->surname = (char *) malloc(strlen(buf) + 1);
   if (person->surname == NULL) {
     return EXIT_FAILURE;
   }
+
   strncpy(person->surname, buf, strlen(buf) + 1);
 
   // read name
-  fscanf(file, "%s", buf);
+  fscanf(file, "%29s", buf);
   person->name = (char *) malloc(strlen(buf) + 1);
   if (person->name == NULL) {
     return EXIT_FAILURE;
   }
   strncpy(person->name, buf, strlen(buf) + 1);
 
-  fscanf(file, "%s", buf);
+  fscanf(file, "%29s", buf);
   if (strncmp(buf, "Female", sizeof("Female")) == 0) {
     person->gender = Female;
   } else {

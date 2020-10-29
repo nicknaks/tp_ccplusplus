@@ -35,7 +35,7 @@ script:
   - rm -rf build
   - mkdir build
   - cd build
-  - cmake .. -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION -DTARGET_CPU=$TARGET_CPU -DCMAKE_C_FLAGS="--coverage" -DCMAKE_CXX_FLAGS="--coverage" -DMULTI_THREAD:BOOL=ON
+  - cmake .. -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION -DTARGET_CPU=$TARGET_CPU -DCMAKE_C_FLAGS="--coverage" -DCMAKE_CXX_FLAGS="--coverage" -DMULTITHREADING:BOOL=ON
   - whereis pthread
   - make
   - ./test/Google_Tests_run
@@ -44,4 +44,4 @@ script:
   - bash <(curl -s https://codecov.io/bash)
   - cd ..
   - cd project
-  - cppcheck --enable=warning,performance,information *.c
+  - cppcheck --enable=warning,performance,information my_array/*.c my_list/*.c *.c

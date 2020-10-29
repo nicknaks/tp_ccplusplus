@@ -10,7 +10,6 @@ Array *init_array() {
 
   array->employee = (Employee*) calloc(10, sizeof(Employee));
   if (array->employee == NULL) {
-    free(array);
     return NULL;
   }
 
@@ -36,6 +35,7 @@ int add_element(Array *array, const Employee *employee) {
   array->is_sorted = false;
   return EXIT_SUCCESS;
 }
+
 int print_array(const Array *array) {
   if (array == NULL) {
     return EXIT_FAILURE;
@@ -54,13 +54,14 @@ int print_array(const Array *array) {
 
   return EXIT_SUCCESS;
 }
+
 // resize memory in 2x
 int resize(Array *array) {
   if (array == NULL){
     return EXIT_FAILURE;
   }
 
-  array->employee = realloc(array->employee, array->capacity * 2 * sizeof(Employee));
+  array->employee = (Employee*) realloc(array->employee, array->capacity * 2 * sizeof(Employee));
   if (array->employee == NULL) {
     return EXIT_FAILURE;
   }
@@ -84,7 +85,7 @@ int free_array(Array *array) {
   return EXIT_SUCCESS;
 }
 
-// для qsort
+// for qsort
 int compare_by_age(const void * rhs, const void * lhs) {
   return (((Employee*)lhs)->age - ((Employee*)rhs)->age);
 }
@@ -114,16 +115,16 @@ int split_arrays(Array *array) {
 
   max_age_array.size = min_age_array.size = 5;
 
-  for (int i = 0; i < 5; ++i) {
+  for (int i = 0; i < max_age_array.size; ++i) {
     max_age_array.employee[i] = array->employee[i];
     min_age_array.employee[i] = array->employee[array->size - 1 - i];
   }
 
-  qsort(max_age_array.employee, 5, sizeof(Employee), compare_by_surname);
+  qsort(max_age_array.employee, max_age_array.size, sizeof(Employee), compare_by_surname);
   printf("\tOldest\n");
   print_array(&max_age_array);
 
-  qsort(min_age_array.employee, 5, sizeof(Employee), compare_by_surname);
+  qsort(min_age_array.employee, min_age_array.size, sizeof(Employee), compare_by_surname);
   printf("\tYoungest\n");
   print_array(&min_age_array);
 

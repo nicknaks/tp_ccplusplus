@@ -7,7 +7,6 @@
 #include <stdbool.h>
 #include <string.h>
 
-
 enum Gender{
   Male,
   Female,
@@ -21,7 +20,6 @@ typedef struct Employee{
   int salary;
   int experience;
 } Employee;
-
 
 int scan_employee_from_file(FILE* file, Employee* person);
 

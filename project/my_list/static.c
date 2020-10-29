@@ -1,6 +1,6 @@
 #include "List.h"
 
-int print_node(const Node *head) {
+int separate_and_print_node(const Node *head) {
   if (head == NULL) {
     return EXIT_FAILURE;
   }

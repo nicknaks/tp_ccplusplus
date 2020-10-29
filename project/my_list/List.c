@@ -24,6 +24,7 @@ Node *init_node(const char* position) {
 
   return head;
 }
+
 int free_node(Node **head) {
   if (*head == NULL) {
     return EXIT_FAILURE;
@@ -67,6 +68,10 @@ Array* add_node(Node **head, const char* position) {
   strncpy(tmp_node->position, position, strlen(position) + 1);
 
   tmp_node->employees = init_array();
+  if (tmp_node->employees == NULL) {
+    return NULL;
+  }
+
   *head = tmp_node;
   return (*head)->employees;
 }
@@ -98,13 +103,11 @@ int scan_from_file(const char *filename, Node** head) {
   if (file == NULL) {
     puts("ERROR : FILE OPEN");
     return EXIT_FAILURE;
-  } else {
-    puts("FILE OPEN");
   }
 
   char buff_scan [30];
 
-  while (fscanf(file,"%s",buff_scan) != EOF) {
+  while (fscanf(file,"%29s",buff_scan) != EOF) {
     Array* employees = NULL;
     Employee person;
     if (*head == NULL) {
@@ -116,7 +119,7 @@ int scan_from_file(const char *filename, Node** head) {
         employees = add_node(head, buff_scan);
       }
     }
-    // имеем валидный указатель на массив, куда запишем сотрудника
+
     scan_employee_from_file(file, &person);
     add_element(employees, &person);
   }

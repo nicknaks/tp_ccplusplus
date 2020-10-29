@@ -9,10 +9,7 @@ void* separate_array(void* arg){
   pthread_detach(pthread_self());
   Node* node = (Node*) arg;
 
-  int s = pthread_mutex_lock(&mutex);
-  if (s == 0){
-
-  }
+  pthread_mutex_lock(&mutex);
 
   printf("\n\tPosition : %s\n", node->position);
 
@@ -22,7 +19,7 @@ void* separate_array(void* arg){
   return NULL;
 }
 
-int print_node(const Node *head) {
+int separate_and_print_node(const Node *head) {
   if (head == NULL) {
     return EXIT_FAILURE;
   }
@@ -34,34 +31,28 @@ int print_node(const Node *head) {
     change_head = change_head->next;
   } while(change_head != NULL);
 
-
-  // находим кол-во доступных потоков
   size_t thread_max = sysconf(_SC_NPROCESSORS_CONF);
-  thread_max = count;
 
-  // создаем потоки
-  pthread_t threads [thread_max];
+  pthread_t* threads = malloc(thread_max * sizeof(pthread_t));
 
   int err_flag = 0;
-  // создаем н - 1 потоков
-  // в цикле запускаем все потоки и смотрим, на завершенность всех потоков, постоянно передавая им новые данные
 
   change_head = (Node*) head;
 
-  size_t i = 0;
-  do{
-
-    err_flag = pthread_create(&threads[i], NULL, separate_array, change_head);
-    if (err_flag == 0) {
+  do {
+    for (int i = 0; i < thread_max; ++i) {
+      err_flag = pthread_create(&threads[i], NULL, separate_array, change_head);
+      if (err_flag == 0) {
+        break;
+      }
+      if (i + 1 == thread_max) {
+        i = -1;
+      }
     }
-    i++;
     change_head = change_head->next;
   } while (change_head != NULL);
 
-//  do {
-//    split_arrays(change_head->employees);
-//    change_head = change_head->next;
-//  } while (change_head != NULL);
+  free(threads);
+
   pthread_exit(0);
- return EXIT_SUCCESS;
 }
